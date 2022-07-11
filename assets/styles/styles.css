@@ -1,0 +1,40 @@
+.titulo-lista-productos{
+    font-family: 'Ubuntu', sans-serif;
+    font-style: bold;
+}
+
+.parrafo-lista-productos{
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.icono{
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 36px; 
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+    float: left;
+    margin-right: 10px;
+}
+
+.boton-agregar{
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.icono-texto-alerta{
+    float: left;
+    margin-right: 10px;
+} 
+
+.contenedor-icono-editar-borrar{
+    float: right;
+    font-size: 24px;
+}
+
