@@ -56,7 +56,7 @@ const leerDatos = () => {
         arrayDeHerramientas.map(herramienta => {
             listaHerramientasEnLaPagina.innerHTML += `<div class="alert alert-secondary" role="alert">
             <i class="icono-texto-alerta material-icons">home_repair_service</i>
-            <b>${herramienta.herramienta}</b>
+            <b class="texto-herramienta">${herramienta.herramienta}</b>
             <span class="contenedor-icono-editar-borrar"><i class="material-icons">drive_file_rename_outline</i>
             <i class="material-icons">delete_sweep</i></span></div>`
         });

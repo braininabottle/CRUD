@@ -37,3 +37,18 @@
     float: right;
 }
 
+.material-icons{
+    font-size: 30px;
+    cursor:pointer;
+    transition: all 0.3s; 
+    
+}
+
+.texto-herramienta{
+    font-size: 20px;
+}
+
+.material-icons:hover{
+    color: blue;
+}
+
