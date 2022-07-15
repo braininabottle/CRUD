@@ -9,7 +9,7 @@ let arrayDeHerramientas = [];
 let modoEdicion = false
 //funciones
 
-//Función CREATE
+//Función CREATE, crea la herramienta y luego le da un push al array de herramientas, que inicialmente esta vacío.
 
 const crearHerramienta = herramienta => {
     
@@ -32,19 +32,20 @@ const crearHerramienta = herramienta => {
 }
 
 
-// función de Conversar datos
+// función que  almacena los  datos en el local Storage para que no se pierda la información en caso de actualizar la página. 
+//Solo desaparece la info cuando usuario elimiina esta misma.
 
-const preservarDatos = () => {
+const almacenarDatosLS = () => {
 
-    localStorage.setItem('compras', JSON.stringify(arrayDeHerramientas));
+    localStorage.setItem('compras', JSON.stringify(arrayDeHerramientas)); //JSON.STRINGIFY convierte el array a un string ya que setItem() solo recibe valores de string.
 
-    leerDatos();
+    TrasladarDatosAlmacenadosEnLSaSitioWeb();
 }
 
 
-// Función READ (leer los datos guardados en la base de datos)
+// Función READ, crea el elemento de manera dinamica.
 
-const leerDatos = () => {
+const TrasladarDatosAlmacenadosEnLSaSitioWeb = () => {
 
     listaHerramientasEnLaPagina.innerHTML = '';
     
@@ -86,7 +87,7 @@ const eliminarHerramienta = herramienta => {
 
 arrayDeHerramientas.splice(indexArray, 1);
 
-preservarDatos();
+almacenarDatosLS();
 
 } 
 
@@ -108,7 +109,7 @@ const guardarCambios = () => {
     let herramientaEscritaUsuario = document.getElementById("herramienta");
     let indexArray = arrayDeHerramientas.findIndex((element) => element.herramienta === herramientaEscritaUsuario.getAttribute('data-antiguo') );
     arrayDeHerramientas[indexArray].herramienta = herramientaEscritaUsuario.value
-    preservarDatos();
+    almacenarDatosLS();
     modoEdicion = false
     document.getElementById("boton-multi-funcion").innerText = 'Agregar'
 }
@@ -127,13 +128,13 @@ formularioEnLaPagina.addEventListener('submit', (evento) => {
         crearHerramienta(herramientaEscritaUsuario);
     }
     
-    preservarDatos();
+    almacenarDatosLS();
 
     formularioEnLaPagina.reset();
 
 })
 
-document.addEventListener('DOMContentLoaded', leerDatos);
+document.addEventListener('DOMContentLoaded', TrasladarDatosAlmacenadosEnLSaSitioWeb);
 
 listaHerramientasEnLaPagina.addEventListener('click', (event) => {
     
@@ -158,15 +159,3 @@ listaHerramientasEnLaPagina.addEventListener('click', (event) => {
     
 });
 
-
-
-/*arrayDeHerramientas.map((element) => {
-        
-    if(element.herramienta === herramienta){
- 
-        arrayDeHerramientas = [];
-
-    }else{
-
-        return false
-    } */
