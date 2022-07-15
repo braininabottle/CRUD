@@ -6,21 +6,27 @@
 const formularioEnLaPagina = document.getElementById("formulario");
 const listaHerramientasEnLaPagina = document.getElementById("listaHerramientas");
 let arrayDeHerramientas = []; 
-
+let modoEdicion = false
 //funciones
 
 //Función CREATE
 
-const crearHerramienta = (herramienta) => {
+const crearHerramienta = herramienta => {
     
     let item = 
         {
             herramienta: herramienta, 
             estado: false
         }
-
-    arrayDeHerramientas.push(item);
-
+   
+        let elementoYaExiste = arrayDeHerramientas.find((element) => element.herramienta === herramienta)
+        
+        if(elementoYaExiste !== undefined){
+           window.alert('Esta herramienta ya se encuentra en esta lista')
+        }else{
+           arrayDeHerramientas.push(item);
+        }
+        
     return item;
 
 }
@@ -47,13 +53,14 @@ const leerDatos = () => {
     if(arrayDeHerramientas === null){
         arrayDeHerramientas = [];
     }else{
-        arrayDeHerramientas.map((herramienta) => {
+        arrayDeHerramientas.map(herramienta => {
             listaHerramientasEnLaPagina.innerHTML += `<div class="alert alert-secondary" role="alert">
             <i class="icono-texto-alerta material-icons">home_repair_service</i>
-            <b>${herramienta.herramienta}</b> - ${herramienta.estado === true?'disponible':'agotado'}
+            <b>${herramienta.herramienta}</b>
             <span class="contenedor-icono-editar-borrar"><i class="material-icons">drive_file_rename_outline</i>
             <i class="material-icons">delete_sweep</i></span></div>`
         });
+       
 
     }
 
@@ -61,7 +68,7 @@ const leerDatos = () => {
 
 //función eliminar herramienta
 
-const eliminarHerramienta = (herramienta) => {
+const eliminarHerramienta = herramienta => {
     
     let indexArray;
 
@@ -72,6 +79,8 @@ const eliminarHerramienta = (herramienta) => {
         indexArray = index;
 
     }
+
+    
    
 });
 
@@ -83,8 +92,25 @@ preservarDatos();
 
 //editar herramienta 
 
-const editarHerramienta = (herramienta) =>  {
-    
+const editarHerramienta = herramienta => {
+   
+    modoEdicion = true;
+    document.getElementById("boton-multi-funcion").innerText = 'Confirmar'
+    let herramientaEscritaUsuario = document.getElementById("herramienta");
+    herramientaEscritaUsuario.value = herramienta
+    herramientaEscritaUsuario.setAttribute('data-antiguo',herramienta)
+
+}
+
+//función guardar cambios
+
+const guardarCambios = () => {
+    let herramientaEscritaUsuario = document.getElementById("herramienta");
+    let indexArray = arrayDeHerramientas.findIndex((element) => element.herramienta === herramientaEscritaUsuario.getAttribute('data-antiguo') );
+    arrayDeHerramientas[indexArray].herramienta = herramientaEscritaUsuario.value
+    preservarDatos();
+    modoEdicion = false
+    document.getElementById("boton-multi-funcion").innerText = 'Agregar'
 }
 
 //EventListener 
@@ -95,8 +121,12 @@ formularioEnLaPagina.addEventListener('submit', (evento) => {
     
     evento.preventDefault();
     let herramientaEscritaUsuario = document.getElementById("herramienta").value; 
-
-    crearHerramienta(herramientaEscritaUsuario);
+    if(modoEdicion === true ){
+        guardarCambios();
+    }else {
+        crearHerramienta(herramientaEscritaUsuario);
+    }
+    
     preservarDatos();
 
     formularioEnLaPagina.reset();
@@ -111,32 +141,32 @@ listaHerramientasEnLaPagina.addEventListener('click', (event) => {
      
     if(event.target.innerHTML === 'drive_file_rename_outline' || event.target.innerHTML === 'delete_sweep'){ 
         
-        const rutadeEliminación = event.path[2].childNodes[3].innerHTML;
+        const rutadeEliminacion = event.path[2].childNodes[3].innerHTML;
 
         if(event.target.innerHTML === 'delete_sweep'){
            
-            eliminarHerramienta(rutadeEliminación);
+            eliminarHerramienta(rutadeEliminacion);
 
         }
         if(event.target.innerHTML === 'drive_file_rename_outline'){
 
+            editarHerramienta(rutadeEliminacion);
         }
     
     }
       
     
-});/*|| event.target.innerHTML === 'delete_sweep') {
-    
-        let rutadeEliminacion = event.path[2].childNodes[3].innerHTML;
-    
-        if(event.target.innerHTML === 'delete_sweep'){
-       
-            eliminar(rutadeEliminacion);
-     }
-    
-        if(event.target.innerHTML === 'drive_file_rename_outline'){
+});
 
-     }
-    }
 
-});   */
+
+/*arrayDeHerramientas.map((element) => {
+        
+    if(element.herramienta === herramienta){
+ 
+        arrayDeHerramientas = [];
+
+    }else{
+
+        return false
+    } */
