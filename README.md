@@ -11,4 +11,4 @@ Una vez que el elemento se encuentre en la lista el usuario tendrá dos opciones
 1-Editar el producto, el cual devolvera el nombre del producto al INPUT y luego debe confirmarlo o editar el nombre de la herramienta o,
 2-Eliminar la herramienta.
 
-Además, como funcionalidad adicional, a través de una alerta de window se le indica al usuario que la herramienta existe en caso de que esta ya se encuentre en la lista.
+Además, como funcionalidad adicional, a través de una alerta de window se le indica al usuario que la herramienta existe en caso de que esta ya se encuentre en la lista y que no se puede ingrear un input vacío.
