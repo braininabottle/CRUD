@@ -4,13 +4,14 @@
 // arrayDeHerramientas = array que va almacenando las herramientas que se van creando.
 const formularioEnLaPagina = document.getElementById("formulario");
 const listaHerramientasEnLaPagina = document.getElementById("listaHerramientas");
+const inputVacio = document.getElementById("herramienta");
 let arrayDeHerramientas = []; 
 let modoEdicion = false //modo edición siempre va a comnenzar en falso porque debe obedecer a una condición de un evento.
 //funciones
 //Función CREATE, crea la herramienta y luego le da un push al array de herramientas, que inicialmente esta vacío.
 const crearHerramienta = herramienta => {
-    if(formulario.value === "" ){
-        window.alert('debe ingresar nombre de alguna herramienta')
+    if(inputVacio.value === '' ){
+        window.alert('Debe ingresar el nombre de la herramienta que desea comprar')
     }else{
         let item = 
         {
@@ -22,7 +23,6 @@ const crearHerramienta = herramienta => {
         }else{
            arrayDeHerramientas.push(item);
         }
-    return item;
 }
 }
 // función que  almacena los  datos en el local Storage para que no se pierda la información en caso de actualizar la página. 
